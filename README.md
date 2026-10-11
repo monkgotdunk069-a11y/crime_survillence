@@ -31,6 +31,8 @@ An end-to-end intelligence system for **Crime Surveillance Heat Analysis**, **Sp
 5. **Fully Executed Jupyter Notebook (`project.ipynb`)**:
    - Complete exploratory analysis, formulas, code cells, Seaborn/Matplotlib heatmaps, confusion matrices, and interactive Folium geospatial layers.
 
+   live demo https://crime-survillence.onrender.com/
+
 ---
 
 ## 📐 Mathematical Formulation of Crime Heat Index (CHI)
