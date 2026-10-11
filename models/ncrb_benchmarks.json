@@ -1,0 +1,270 @@
+{
+  "ml_performance": {
+    "heat_accuracy": 99.82,
+    "heat_roc_auc": 1.0,
+    "classification_report": {
+      "High Heat": {
+        "precision": 1.0,
+        "recall": 0.9928698752228164,
+        "f1-score": 0.9964221824686941,
+        "support": 561.0
+      },
+      "Low Heat": {
+        "precision": 0.9993764614185503,
+        "recall": 0.9985981308411215,
+        "f1-score": 0.9989871445266848,
+        "support": 6420.0
+      },
+      "Medium Heat": {
+        "precision": 0.9950626661602735,
+        "recall": 0.9984756097560976,
+        "f1-score": 0.9967662164732737,
+        "support": 2624.0
+      },
+      "accuracy": 0.9982300884955753,
+      "macro avg": {
+        "precision": 0.998146375859608,
+        "recall": 0.9966478719400119,
+        "f1-score": 0.9973918478228841,
+        "support": 9605.0
+      },
+      "weighted avg": {
+        "precision": 0.9982343902458772,
+        "recall": 0.9982300884955753,
+        "f1-score": 0.9982305949247395,
+        "support": 9605.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        557,
+        0,
+        4
+      ],
+      [
+        0,
+        6411,
+        9
+      ],
+      [
+        0,
+        4,
+        2620
+      ]
+    ],
+    "classes": [
+      "High Heat",
+      "Low Heat",
+      "Medium Heat"
+    ],
+    "feature_importances": {
+      "Weapon_Enc": 0.3724,
+      "Crime_Desc_Enc": 0.304,
+      "Police Deployed": 0.1446,
+      "DayOfWeek": 0.0766,
+      "IsWeekend": 0.0728,
+      "Victim_Gender_Enc": 0.0055,
+      "State_Enc": 0.0055,
+      "Victim Age": 0.0049,
+      "Season_Enc": 0.0047,
+      "City_Enc": 0.0045,
+      "Month": 0.0045,
+      "Hour": 0.0,
+      "TimeOfDay_Enc": 0.0
+    }
+  },
+  "ncrb_validation": {
+    "composite_ncrb_alignment_pct": 85.27,
+    "statistical_verdict": "STRONG NCRB COMPLIANCE",
+    "metrics": {
+      "city_distribution_cosine_similarity": 0.641,
+      "city_distribution_mape_pct": 133.41,
+      "chi_square_statistic": 62694.0337,
+      "chi_square_p_value": 0.0,
+      "domain_cosine_similarity": 0.9928,
+      "case_closure_rate_predicted_pct": 50.16,
+      "case_closure_rate_ncrb_pct": 49.96,
+      "closure_variance_pct": 0.2
+    },
+    "city_breakdown": {
+      "Delhi": {
+        "predicted_share_pct": 0.64,
+        "ncrb_benchmark_pct": 13.45,
+        "variance_pct": -12.81
+      },
+      "Mumbai": {
+        "predicted_share_pct": 1.0,
+        "ncrb_benchmark_pct": 11.0,
+        "variance_pct": -10.0
+      },
+      "Bangalore": {
+        "predicted_share_pct": 0.63,
+        "ncrb_benchmark_pct": 8.93,
+        "variance_pct": -8.3
+      },
+      "Hyderabad": {
+        "predicted_share_pct": 0.5,
+        "ncrb_benchmark_pct": 7.17,
+        "variance_pct": -6.67
+      },
+      "Kolkata": {
+        "predicted_share_pct": 0.67,
+        "ncrb_benchmark_pct": 6.27,
+        "variance_pct": -5.6
+      },
+      "Chennai": {
+        "predicted_share_pct": 0.92,
+        "ncrb_benchmark_pct": 6.21,
+        "variance_pct": -5.29
+      },
+      "Pune": {
+        "predicted_share_pct": 1.1,
+        "ncrb_benchmark_pct": 5.51,
+        "variance_pct": -4.41
+      },
+      "Ahmedabad": {
+        "predicted_share_pct": 0.82,
+        "ncrb_benchmark_pct": 4.52,
+        "variance_pct": -3.7
+      },
+      "Jaipur": {
+        "predicted_share_pct": 0.98,
+        "ncrb_benchmark_pct": 3.68,
+        "variance_pct": -2.7
+      },
+      "Lucknow": {
+        "predicted_share_pct": 1.33,
+        "ncrb_benchmark_pct": 3.63,
+        "variance_pct": -2.3
+      },
+      "Kanpur": {
+        "predicted_share_pct": 1.35,
+        "ncrb_benchmark_pct": 2.77,
+        "variance_pct": -1.42
+      },
+      "Surat": {
+        "predicted_share_pct": 0.83,
+        "ncrb_benchmark_pct": 2.77,
+        "variance_pct": -1.94
+      },
+      "Nagpur": {
+        "predicted_share_pct": 1.0,
+        "ncrb_benchmark_pct": 2.62,
+        "variance_pct": -1.62
+      },
+      "Agra": {
+        "predicted_share_pct": 1.37,
+        "ncrb_benchmark_pct": 1.9,
+        "variance_pct": -0.53
+      },
+      "Ludhiana": {
+        "predicted_share_pct": 0.32,
+        "ncrb_benchmark_pct": 1.89,
+        "variance_pct": -1.57
+      },
+      "Visakhapatnam": {
+        "predicted_share_pct": 0.44,
+        "ncrb_benchmark_pct": 1.81,
+        "variance_pct": -1.37
+      },
+      "Thane": {
+        "predicted_share_pct": 1.0,
+        "ncrb_benchmark_pct": 1.76,
+        "variance_pct": -0.76
+      },
+      "Ghaziabad": {
+        "predicted_share_pct": 1.44,
+        "ncrb_benchmark_pct": 1.75,
+        "variance_pct": -0.31
+      },
+      "Indore": {
+        "predicted_share_pct": 1.11,
+        "ncrb_benchmark_pct": 1.74,
+        "variance_pct": -0.63
+      },
+      "Patna": {
+        "predicted_share_pct": 0.62,
+        "ncrb_benchmark_pct": 1.73,
+        "variance_pct": -1.11
+      },
+      "Bhopal": {
+        "predicted_share_pct": 1.16,
+        "ncrb_benchmark_pct": 1.72,
+        "variance_pct": -0.56
+      },
+      "Meerut": {
+        "predicted_share_pct": 1.37,
+        "ncrb_benchmark_pct": 0.98,
+        "variance_pct": 0.39
+      },
+      "Srinagar": {
+        "predicted_share_pct": 0.14,
+        "ncrb_benchmark_pct": 0.92,
+        "variance_pct": -0.78
+      },
+      "Nashik": {
+        "predicted_share_pct": 1.02,
+        "ncrb_benchmark_pct": 0.91,
+        "variance_pct": 0.11
+      },
+      "Vasai": {
+        "predicted_share_pct": 1.03,
+        "ncrb_benchmark_pct": 0.9,
+        "variance_pct": 0.13
+      },
+      "Varanasi": {
+        "predicted_share_pct": 1.35,
+        "ncrb_benchmark_pct": 0.88,
+        "variance_pct": 0.47
+      },
+      "Kalyan": {
+        "predicted_share_pct": 1.02,
+        "ncrb_benchmark_pct": 0.88,
+        "variance_pct": 0.14
+      },
+      "Faridabad": {
+        "predicted_share_pct": 0.45,
+        "ncrb_benchmark_pct": 0.88,
+        "variance_pct": -0.43
+      },
+      "Rajkot": {
+        "predicted_share_pct": 0.89,
+        "ncrb_benchmark_pct": 0.8,
+        "variance_pct": 0.09
+      }
+    },
+    "domain_breakdown": {
+      "Other Crime": {
+        "predicted_share_pct": 61.14,
+        "ncrb_benchmark_pct": 57.14,
+        "variance_pct": 4.0
+      },
+      "Violent Crime": {
+        "predicted_share_pct": 32.86,
+        "ncrb_benchmark_pct": 28.57,
+        "variance_pct": 4.29
+      },
+      "Fire Accident": {
+        "predicted_share_pct": 2.28,
+        "ncrb_benchmark_pct": 9.52,
+        "variance_pct": -7.24
+      },
+      "Traffic Fatality": {
+        "predicted_share_pct": 3.73,
+        "ncrb_benchmark_pct": 4.77,
+        "variance_pct": -1.04
+      }
+    }
+  },
+  "dataset_summary": {
+    "total_incidents": 48023,
+    "unique_cities": 193,
+    "crime_categories": 23,
+    "date_span": "2020-01-01 to 2024-07-30",
+    "heat_distribution": {
+      "Low Heat": 32101,
+      "Medium Heat": 13119,
+      "High Heat": 2803
+    }
+  }
+}
