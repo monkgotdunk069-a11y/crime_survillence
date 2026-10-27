@@ -3,11 +3,13 @@ Machine Learning Pipeline for Crime Surveillance Heat Prediction & Resource Allo
 """
 
 import os
+import warnings
 import joblib
 import numpy as np
 import pandas as pd
 from typing import Dict, Any, Tuple
 from sklearn.model_selection import train_test_split
+from sklearn.exceptions import InconsistentVersionWarning
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier, RandomForestRegressor
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, r2_score, mean_squared_error
@@ -173,18 +175,54 @@ class CrimeHeatPredictor:
         joblib.dump(self.scaler, os.path.join(self.models_dir, 'scaler.pkl'))
 
     def load_models(self):
-        """Loads serialized models and encoders from disk."""
-        self.heat_model = joblib.load(os.path.join(self.models_dir, 'heat_model.pkl'))
-        self.violent_model = joblib.load(os.path.join(self.models_dir, 'violent_model.pkl'))
-        self.police_model = joblib.load(os.path.join(self.models_dir, 'police_model.pkl'))
-        self.label_encoders = joblib.load(os.path.join(self.models_dir, 'encoders.pkl'))
-        self.scaler = joblib.load(os.path.join(self.models_dir, 'scaler.pkl'))
+        """Loads serialized models and encoders from disk.
+
+        If a model artifact is missing or incompatible with the current runtime,
+        a descriptive error is raised so callers can re-train the models before
+        using them in prediction.
+        """
+        required_files = {
+            'heat_model': os.path.join(self.models_dir, 'heat_model.pkl'),
+            'violent_model': os.path.join(self.models_dir, 'violent_model.pkl'),
+            'police_model': os.path.join(self.models_dir, 'police_model.pkl'),
+            'encoders': os.path.join(self.models_dir, 'encoders.pkl'),
+            'scaler': os.path.join(self.models_dir, 'scaler.pkl'),
+        }
+
+        missing = [name for name, path in required_files.items() if not os.path.exists(path)]
+        if missing:
+            raise FileNotFoundError(f"Missing model artifact(s): {', '.join(missing)}")
+
+        try:
+            with warnings.catch_warnings(record=True) as caught:
+                warnings.simplefilter('always')
+                self.heat_model = joblib.load(required_files['heat_model'])
+                self.violent_model = joblib.load(required_files['violent_model'])
+                self.police_model = joblib.load(required_files['police_model'])
+                self.label_encoders = joblib.load(required_files['encoders'])
+                self.scaler = joblib.load(required_files['scaler'])
+
+            incompatible = any(
+                isinstance(w.message, InconsistentVersionWarning)
+                or 'older version' in str(w.message).lower()
+                or 'serialized model' in str(w.message).lower()
+                for w in caught
+            )
+            if incompatible:
+                raise RuntimeError('Saved model artifacts were built with a different dependency version and must be retrained.')
+        except Exception as exc:
+            raise RuntimeError(f"Unable to load saved model artifacts from '{self.models_dir}': {exc}") from exc
 
     def predict_surveillance_risk(self, input_dict: Dict[str, Any]) -> Dict[str, Any]:
         """
         Runs real-time inference on a surveillance incident.
         Returns predicted Heat Risk Level, Probabilities, Violent Risk, and Recommended Police Patrol units.
         """
+        if self.heat_model is None or self.violent_model is None or self.police_model is None or not self.label_encoders:
+            raise RuntimeError(
+                "Model artifacts are not loaded. Re-train the models or call load_models() before inference."
+            )
+
         df_in = pd.DataFrame([input_dict])
         
         # Ensure clean weapon, state and time derivations

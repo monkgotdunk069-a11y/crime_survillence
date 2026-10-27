@@ -20,8 +20,18 @@ CORS(app)
 
 # Load predictor and benchmarks
 predictor = CrimeHeatPredictor(models_dir='models')
-if os.path.exists('models/heat_model.pkl'):
+try:
     predictor.load_models()
+except Exception:
+    if os.path.exists('crime_processed_enriched.csv'):
+        df = pd.read_csv('crime_processed_enriched.csv')
+        predictor.train_pipeline(df)
+    elif os.path.exists('crime_dataset_india.csv'):
+        from src.crime_heat_engine import preprocess_crime_data
+        df = preprocess_crime_data(pd.read_csv('crime_dataset_india.csv'))
+        predictor.train_pipeline(df)
+    else:
+        raise
 
 # Load processed data sample for rapid dashboard queries
 processed_csv = 'crime_processed_enriched.csv'
